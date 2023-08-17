@@ -1,0 +1,50 @@
+body{
+
+    font-size: 1.2rem;
+   
+    
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transform: translate(-50%);
+    margin-left: 50%;
+    margin-top: 200px;
+    border-color: black;
+    border-width: 5px;
+    border: solid;
+    width: fit-content;
+    padding: 40px;
+    
+    border-radius: 25px;
+}
+
+.first{
+    display: flex;
+    flex-direction: column;
+}
+
+.fname, .id, .contact{
+    width: 200px;
+    font-size: 1.2rem;
+    padding: 3px;
+}
+
+.fname:hover , .id:hover , .contact:hover{
+    padding: 4px;
+}
+
+.submit{
+    font-size: 1.2rem;
+    padding: 7px;
+    border-radius: 10px;
+    border-color: black;
+
+}
+
+.submit:hover{
+    background-color: rgb(174, 249, 174);
+    padding: 11px;
+    border-color: transparent;
+}

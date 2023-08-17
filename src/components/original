@@ -1,0 +1,64 @@
+import React, { useState } from 'react'
+import '../components/Formstyles.css'
+
+export default function Form() {
+    const[fname,setFname] = useState('');
+    const[id,setId] = useState('');
+    const[contact,setContact] = useState('');
+    const[message,setMessage]=useState('');
+
+
+
+    const handleRegister = async (e) => {
+        e.preventDefault()
+        const response = await fetch('http://localhost:5000/api/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ fname, id, contact })
+          
+        });
+
+        console.log(JSON.stringify({ fname, id, contact }))
+    
+        const data = await response.json();
+        setMessage(data.message);
+      };
+
+  return (
+    <div>
+        <form onSubmit={handleRegister}>
+            <div className='first'>
+                <label>Name</label>
+                <input type='text' className='fname' onChange={(e)=> setFname(e.target.value)} required></input>
+            </div>
+            <br/>
+
+
+            <div className='first'>
+            <label>Employee ID</label>
+                <input type='text' className='id' onChange={(e) => setId(e.target.value)} required></input>
+
+            </div>
+            <br/>
+
+            <div className='first'>
+            <label>Contact</label>
+                <input type='int' className='contact' onChange={(e)=>setContact(e.target.value)} required></input>
+
+            </div>
+            <br/>
+        
+            <div className='first'>
+                <input type='submit' className='submit' required></input>
+
+            </div>
+            
+            
+            <div>{message && <p>{message}</p>}</div>
+        </form>
+      
+    </div>
+  )
+}

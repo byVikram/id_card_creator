@@ -1,0 +1,74 @@
+import React, { useState } from 'react'
+import '../components/Formstyles.css'
+
+export default function Form() {
+    const[fname,setFname] = useState('');
+    const[id,setId] = useState('');
+    const[contact,setContact] = useState('');
+    const[message,setMessage]=useState('');
+    const[file,setFile]=useState('');
+
+
+
+    const handleRegister = async (e) => {
+      e.preventDefault();
+  
+      const formData = new FormData();
+      formData.append("fname", fname);
+      formData.append("id", id);
+      formData.append("contact", contact);
+      formData.append("file",file)
+  
+      const response = await fetch('http://localhost:5000/api/register', {
+          method: 'POST',
+          body: formData
+      });
+  
+      console.log("Form Data:", formData);
+  
+      const data = await response.json();
+      setMessage(data.message);
+  };
+
+  return (
+    <div>
+        <form onSubmit={handleRegister}>
+            <div className='first'>
+                <label>Name</label>
+                <input type='text' className='fname' onChange={(e)=> setFname(e.target.value)} required></input>
+            </div>
+            <br/>
+
+
+            <div className='first'>
+            <label>Employee ID</label>
+                <input type='text' className='id' onChange={(e) => setId(e.target.value)} required></input>
+
+            </div>
+            <br/>
+
+            <div className='first'>
+            <label>Contact</label>
+                <input type='int' className='contact' onChange={(e)=>setContact(e.target.value)} required></input>
+
+            </div>
+            <br/>
+            <div className='first'>
+            
+                <input type='file'  onChange={(e)=>setFile(e.target.files[0])} required></input>
+
+            </div>
+            <br/>
+        
+            <div className='first'>
+                <input type='submit' className='submit' required></input>
+
+            </div>
+            
+            
+            <div>{message && <p>{message}</p>}</div>
+        </form>
+      
+    </div>
+  )
+}
